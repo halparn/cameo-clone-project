@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+npx commitizen init cz-conventional-changelog --save-dev --save-exact
