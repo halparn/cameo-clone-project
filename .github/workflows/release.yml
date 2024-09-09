@@ -38,4 +38,4 @@ jobs:
     steps:
       - name: Print version
         run: |
-          echo "The extracted version is $REVISION"
+          echo "The extracted version is $needs.generate-changelog-and-release.outputs.revision"
