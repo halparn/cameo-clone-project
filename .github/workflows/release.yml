@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   # Job 2: Generate Changelog, Create Release Tag, and Publish Release
