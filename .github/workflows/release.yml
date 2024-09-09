@@ -19,12 +19,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Extract latest version from CHANGELOG.md
-        id: get_version
         run: |
           awk --version
           revision=$(awk '/## \[/{print substr($0, match($0, /\[.*\]/)+1, RLENGTH-2); exit}' docs/CHANGELOG.md)
           echo revision=$revision >> $GITHUB_OUTPUT
-          
+
   build-up:
     name: Attach Artifacts to Release
     runs-on: ubuntu-latest
@@ -33,9 +32,6 @@ jobs:
       revision: ${{ needs.generate-changelog-and-release.outputs.revision }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Print version
         run: |
           echo "The extracted version is $revision"
