@@ -22,5 +22,17 @@ jobs:
         id: get_version
         run: |
           awk --version
-          version=$(awk '/## \[/{print substr($0, match($0, /\[.*\]/)+1, RLENGTH-2); exit}' docs/CHANGELOG.md)
-          echo "version=$version"
+          revision=$(awk '/## \[/{print substr($0, match($0, /\[.*\]/)+1, RLENGTH-2); exit}' docs/CHANGELOG.md)
+          echo "revision=$revision" >> $GITHUB_OUTPUT
+  build-up:
+    name: Attach Artifacts to Release
+    runs-on: ubuntu-latest
+    needs: generate-changelog-and-release
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        env:
+          revision: ${{ needs.generate-changelog-and-release.outputs.revision }}
+
+      - name: prompt version
+        run: echo "The value of revision is $revision"
