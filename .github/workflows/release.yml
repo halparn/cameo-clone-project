@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  # Job 2: Generate Changelog, Create Release Tag, and Publish Release
+  generate-changelog-and-release:
+    name: Generate Changelog and Publish Release
+    runs-on: ubuntu-latest
+    if: success() # Ensures this job runs only if the build job succeeds
+    env:
+      HUSKY_SKIP_HOOKS: 1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Extract latest version from CHANGELOG.md
+        id: get_version
+        run: |
+          awk --version
+          version=$(awk '/## \[/{print substr($0, match($0, /\[.*\]/)+1, RLENGTH-2); exit}' docs/CHANGELOG.md)
+          echo "version=$version"
