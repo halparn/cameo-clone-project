@@ -1,6 +1,6 @@
 export const celebrityData = [
     {
-        name: 'Jon Connor',
+        name: 'Jon Connorr',
         price: '259₺',
         imgSource: 'https://d31wcbk3iidrjq.cloudfront.net/G7AJY0SwA_avatar-dkIzFdw3j.jpg?h=332&w=332&q=100',
         charity: true,
